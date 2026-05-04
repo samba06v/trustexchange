@@ -1,0 +1,43 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/server.ts",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["src/**"]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/health",
+      "dest": "src/server.ts"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "src/server.ts"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "src/server.ts"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "PORT": "5000",
+    "MONGODB_URI": "@mongodb_uri",
+    "JWT_SECRET": "@jwt_secret",
+    "ETHEREUM_RPC_URL": "@ethereum_rpc_url",
+    "POLYGON_RPC_URL": "@polygon_rpc_url",
+    "ARBITRUM_RPC_URL": "@arbitrum_rpc_url",
+    "ESCROW_CONTRACT_ADDRESS": "@escrow_contract_address",
+    "PRIVATE_KEY": "@private_key"
+  },
+  "functions": {
+    "src/server.ts": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  }
+}
