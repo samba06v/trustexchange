@@ -1,29 +1,12 @@
 {
-  "version": 2,
-  "name": "trustexchange",
-  "builds": [
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "frontend/dist"
-      }
+    "experimentalServices": {
+        "frontend": {
+            "routePrefix": "/",
+            "framework": "vite"
+        },
+        "backend": {
+            "entrypoint": "backend",
+            "routePrefix": "/_/backend"
+        }
     }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "https://trustexchange-backend.vercel.app/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "frontend/$1"
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
 }
